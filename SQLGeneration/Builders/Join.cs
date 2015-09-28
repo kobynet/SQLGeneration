@@ -1,5 +1,4 @@
 ﻿using System;
-using SQLGeneration.Parsing;
 
 namespace SQLGeneration.Builders
 {
@@ -53,6 +52,20 @@ namespace SQLGeneration.Builders
             }
             AliasedSource start = new AliasedSource(source, alias);
             return new JoinStart(start);
+        }
+
+        /// <summary>
+        /// Starts creating a BinaryJoin.
+        /// </summary>
+        /// <param name="source">The table or select statement to start the join series with.</param>
+        /// <returns>The first join item.</returns>
+        public static Join From(AliasedSource source)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException("source");
+            }
+            return new JoinStart(source);
         }
 
         /// <summary>
